@@ -2,6 +2,7 @@
 
 namespace Computernoerden\Security\Core;
 
+use Computernoerden\Security\Contracts\ApplicationInterface;
 use Computernoerden\Security\Container\Container;
 
 defined('ABSPATH') || exit;
@@ -9,7 +10,7 @@ defined('ABSPATH') || exit;
 /**
  * Main application bootstrap.
  */
-class Application
+class Application implements ApplicationInterface
 {
     /**
      * Service container.
@@ -17,6 +18,7 @@ class Application
      * @var Container
      */
     private $container;
+
 
     /**
      * Constructor.
