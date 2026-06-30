@@ -13,7 +13,11 @@
  * Text Domain: computernoerdens-security-plugin
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
+
+define('CNO_SECURITY_VERSION', '2.0.0-alpha1');
+define('CNO_SECURITY_PLUGIN_FILE', __FILE__);
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 (new Computernoerden\Security\Core\Application())->boot();

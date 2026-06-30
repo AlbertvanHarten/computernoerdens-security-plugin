@@ -2,47 +2,34 @@
 
 namespace Computernoerden\Security\Core;
 
-use Computernoerden\Security\Contracts\ApplicationInterface;
-use Computernoerden\Security\Container\Container;
 use Computernoerden\Security\Admin\Admin;
+use Computernoerden\Security\Container\Container;
+use Computernoerden\Security\Contracts\ApplicationInterface;
+use Computernoerden\Security\Modules\ModuleManager;
 
 defined('ABSPATH') || exit;
 
-/**
- * Main application bootstrap.
- */
 class Application implements ApplicationInterface
 {
-    /**
-     * Service container.
-     *
-     * @var Container
-     */
     private $container;
 
-
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->container = new Container();
     }
 
-    /**
-     * Boot the application.
-     */
     public function boot()
     {
-        $admin = new Admin();
+        $module_manager = new ModuleManager();
+
+        $this->container->set('modules', $module_manager);
+
+        $admin = new Admin($module_manager);
         $admin->boot();
+
+        $module_manager->boot();
     }
 
-    /**
-     * Get the service container.
-     *
-     * @return Container
-     */
     public function container()
     {
         return $this->container;
