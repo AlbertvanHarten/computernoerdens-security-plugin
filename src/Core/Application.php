@@ -4,6 +4,7 @@ namespace Computernoerden\Security\Core;
 
 use Computernoerden\Security\Contracts\ApplicationInterface;
 use Computernoerden\Security\Container\Container;
+use Computernoerden\Security\Admin\Admin;
 
 defined('ABSPATH') || exit;
 
@@ -33,7 +34,8 @@ class Application implements ApplicationInterface
      */
     public function boot()
     {
-        // Modules will be registered here.
+        $admin = new Admin();
+        $admin->boot();
     }
 
     /**
