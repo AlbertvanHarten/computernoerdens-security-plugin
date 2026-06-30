@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ruleset name="ComputernoerdensSecurityPlugin">
+    <description>PSR-12, with a PHP 7.0 compatibility floor per the project spec.</description>
+
+    <file>src</file>
+    <file>computernoerdens-security-plugin.php</file>
+
+    <arg name="basepath" value="."/>
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <rule ref="PSR12"/>
+
+    <!--
+        PSR12 itself doesn't pin a PHP version. Until PHPCompatibility
+        is wired in (it needs its own Composer install), the most
+        important constraints to watch for by hand are documented in
+        docs/ARCHITECTURE.md: no typed properties, no `void`/nullable
+        return types, no constant visibility modifiers, no arrow
+        functions — all PHP 7.1+/7.4+ features.
+    -->
+</ruleset>

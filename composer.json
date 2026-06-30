@@ -6,9 +6,17 @@
   "require": {
     "php": ">=7.0"
   },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.7"
+  },
   "autoload": {
     "psr-4": {
       "Computernoerden\\Security\\": "src/"
     }
+  },
+  "scripts": {
+    "lint": "php bin/lint.php",
+    "cs": "phpcs --standard=phpcs.xml.dist",
+    "cs:fix": "phpcbf --standard=phpcs.xml.dist"
   }
 }

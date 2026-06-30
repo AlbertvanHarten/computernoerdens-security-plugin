@@ -2,20 +2,34 @@
 
 namespace Computernoerden\Security\Container;
 
-use Computernoerden\Security\Contracts\ContainerInterface;
-
 defined('ABSPATH') || exit;
 
-class Container implements ContainerInterface
+/**
+ * Minimal service container.
+ *
+ * Intentionally has no corresponding interface: there is exactly one
+ * implementation and nothing in the plugin swaps it out or mocks it in
+ * isolation, so an interface would only add indirection.
+ */
+class Container
 {
-    private $services = array();
+    /**
+     * @var array<string, mixed>
+     */
+    private $services = [];
 
-    public function set($id, $service)
+    /**
+     * @param mixed $service
+     */
+    public function set(string $id, $service)
     {
         $this->services[$id] = $service;
     }
 
-    public function get($id)
+    /**
+     * @return mixed|null
+     */
+    public function get(string $id)
     {
         if (!$this->has($id)) {
             return null;
@@ -24,7 +38,7 @@ class Container implements ContainerInterface
         return $this->services[$id];
     }
 
-    public function has($id)
+    public function has(string $id): bool
     {
         return array_key_exists($id, $this->services);
     }

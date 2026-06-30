@@ -1,0 +1,20 @@
+name: Lint
+on:
+  push:
+  pull_request:
+jobs:
+  php-lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # 7.0 is the floor the plugin claims to support; 8.3 is closer to
+        # what most hosts run today. Linting only 8.3 (as before) can't
+        # catch 7.1+/7.4+/8.0+ syntax slipping in, since `php -l` only
+        # fails on syntax the *running* PHP version itself can't parse.
+        php-version: ['7.0', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+      - run: php bin/lint.php
